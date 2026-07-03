@@ -1,53 +1,85 @@
-# Privacy Policy for Apora
+Analyze only the Group module of the Apora Flutter project.
 
-**Last Updated:** June 26, 2026
+Do NOT modify any other feature.
 
-Welcome to **Apora**.
+Current issues:
 
-Your privacy is important to us. This Privacy Policy explains how Apora collects, uses, and protects your information.
+1. The Groups screen keeps showing "Loading..." forever.
+2. Existing groups are not displayed.
+3. Create Group works but the created groups do not appear.
+4. Users cannot properly load into the Groups list.
+5. Group chat needs a "Hide Chat" option.
 
-## Information We Collect
+---
 
-Apora may collect:
+## Fix Group Loading
 
-* Name and profile information
-* Email address (if you create an account)
-* Messages and media you choose to send
-* Device information
-* App performance and crash reports
+Find the exact root cause.
 
-## How We Use Your Information
+Verify:
 
-We use your information to:
+* Firestore queries
+* Stream listeners
+* Providers
+* Repository
+* Authentication state
+* Current user UID
+* Group membership filtering
+* Firestore indexes
+* Null checks
+* Loading state logic
 
-* Provide messaging services
-* Improve app performance
-* Protect user accounts
-* Fix bugs and security issues
+Ensure that:
 
-## Data Security
+* Loading stops after data is received.
+* If there are no groups, show "No Groups Yet" instead of infinite loading.
+* Existing groups appear immediately.
+* Newly created groups appear instantly without restarting the app.
+* Pull-to-refresh works correctly.
 
-We use industry-standard security measures to protect your data.
+---
 
-## Third-Party Services
+## Fix Group Membership
 
-Apora may use trusted third-party services such as:
+Verify that:
 
-* Firebase
-* Google AdMob
-* Google Sign-In
+* Current user is included in the members list.
+* Firestore stores member UIDs correctly.
+* Group queries return only groups where the current user is a member.
 
-These services may collect information according to their own privacy policies.
+---
 
-## Children's Privacy
+## Hide Group Chat
 
-Apora is not intended for children under 13 years of age.
+Add a WhatsApp-style "Hide Chat" option.
 
-## Changes
+When the user long-presses a group chat:
 
-This Privacy Policy may be updated from time to time.
+Show a bottom sheet with:
 
-## Contact
+* Hide Chat
+* Mute Notifications
+* Pin Chat
+* Delete Chat (Leave Group if applicable)
 
-Support Email:
-[alihassan10800301@gmail.com]
+Hide Chat should:
+
+* Remove the group from the main Groups list for that user only.
+* Do NOT delete the group from Firestore.
+* Do NOT remove other members.
+* Save the hidden state locally or in the user's document.
+* Add a Settings option:
+  "Hidden Chats"
+  where hidden groups can be viewed and restored.
+
+---
+
+Run:
+
+flutter analyze
+
+Fix every warning and error related to the Group module.
+
+Generate a new Release APK after all Group issues are fixed.
+
+Do not modify any working features outside the Group module.
