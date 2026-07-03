@@ -1,85 +1,87 @@
-Analyze only the Group module of the Apora Flutter project.
+# Privacy Policy for Apora
 
-Do NOT modify any other feature.
+**Effective Date:** July 3, 2026
 
-Current issues:
+Welcome to **Apora – Private & Secure Chat**.
 
-1. The Groups screen keeps showing "Loading..." forever.
-2. Existing groups are not displayed.
-3. Create Group works but the created groups do not appear.
-4. Users cannot properly load into the Groups list.
-5. Group chat needs a "Hide Chat" option.
+Your privacy is important to us. This Privacy Policy explains what information Apora collects, how it is used, and how we protect your data.
 
----
+## Information We Collect
 
-## Fix Group Loading
+Apora may collect the following information:
 
-Find the exact root cause.
+* Email address (for account authentication)
+* User profile information (name and profile picture)
+* Messages and media shared within the app
+* Device information (required for app functionality)
+* Notification token (to deliver push notifications)
 
-Verify:
+## Media Storage
 
-* Firestore queries
-* Stream listeners
-* Providers
-* Repository
-* Authentication state
-* Current user UID
-* Group membership filtering
-* Firestore indexes
-* Null checks
-* Loading state logic
+Images, videos, voice notes, documents, profile pictures, and group images uploaded through Apora are securely stored using **Supabase Storage**.
 
-Ensure that:
+## Authentication
 
-* Loading stops after data is received.
-* If there are no groups, show "No Groups Yet" instead of infinite loading.
-* Existing groups appear immediately.
-* Newly created groups appear instantly without restarting the app.
-* Pull-to-refresh works correctly.
+User authentication is handled securely using **Firebase Authentication**.
 
----
+## Database
 
-## Fix Group Membership
+Messages, user profiles, and application data are securely stored using **Firebase Firestore**.
 
-Verify that:
+## Advertising
 
-* Current user is included in the members list.
-* Firestore stores member UIDs correctly.
-* Group queries return only groups where the current user is a member.
+Apora displays advertisements through **Google AdMob**.
 
----
+AdMob may collect certain information such as:
 
-## Hide Group Chat
+* Device identifiers
+* Advertising ID
+* Approximate location
+* Device information
 
-Add a WhatsApp-style "Hide Chat" option.
+This information is processed according to Google's Privacy Policy.
 
-When the user long-presses a group chat:
+## Permissions
 
-Show a bottom sheet with:
+Apora may request access to:
 
-* Hide Chat
-* Mute Notifications
-* Pin Chat
-* Delete Chat (Leave Group if applicable)
+* Camera
+* Photos and Media
+* Microphone
+* Notifications
+* Internet Connection
 
-Hide Chat should:
+These permissions are only used to provide the requested features.
 
-* Remove the group from the main Groups list for that user only.
-* Do NOT delete the group from Firestore.
-* Do NOT remove other members.
-* Save the hidden state locally or in the user's document.
-* Add a Settings option:
-  "Hidden Chats"
-  where hidden groups can be viewed and restored.
+## Data Security
 
----
+We use industry-standard security practices to help protect user information. However, no method of electronic storage or transmission is completely secure.
 
-Run:
+## Third-Party Services
 
-flutter analyze
+Apora uses the following third-party services:
 
-Fix every warning and error related to the Group module.
+* Firebase Authentication
+* Firebase Firestore
+* Supabase Storage
+* Google AdMob
 
-Generate a new Release APK after all Group issues are fixed.
+Each service has its own Privacy Policy.
 
-Do not modify any working features outside the Group module.
+## Children's Privacy
+
+Apora is not intended for children under 13 years of age.
+
+## Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. Changes become effective immediately after they are published.
+
+## Contact
+
+If you have any questions about this Privacy Policy, please contact:
+
+**Developer:** Antigravity
+
+**App:** Apora – Private & Secure Chat
+
+**Email:** [your-email@example.com](mailto:your-email@example.com)
